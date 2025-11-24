@@ -1,0 +1,468 @@
+/* --- Estilos Generales del Módulo (Heredados de panel_style.css si se usa) --- */
+
+/* Si no usas panel_style.css, descomenta estas líneas 
+  para tener el layout de sidebar + contenido 
+*/
+/*
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f7fb;
+    color: #333;
+}
+.main-container {
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+.main-content {
+    flex: 1;
+    padding: 25px 40px;
+    overflow-y: auto;
+}
+.module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+.module-header h1 { margin: 0; font-size: 1.6em; }
+.module-header p { margin: 0; font-size: 1.1em; color: #777; }
+.user-info { display: flex; align-items: center; gap: 15px; }
+.user-info span { font-weight: 500; background-color: #f4f0f8; padding: 8px 12px; border-radius: 6px; }
+.logout-link { text-decoration: none; color: #d9534f; font-weight: 500; }
+*/
+
+
+/* --- Estilo de Tarjeta (Formularios y Consultas) --- */
+.form-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+.form-card h2 {
+    font-size: 1.4em;
+    color: #34495e;
+    border-bottom: 1px solid #ecf0f1;
+    padding-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.form-card .form-subtitle {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+/* --- Rejilla de Formulario (como en el boceto) --- */
+.form-grid {
+    display: grid;
+    /* 2 columnas por defecto */
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px 25px; /* Espacio vertical y horizontal */
+}
+
+/* Para campos que ocupan todo el ancho (si los necesitas) */
+.form-field.full-width {
+    grid-column: 1 / -1; /* Ocupa todas las columnas */
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field label {
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+/* Estilo de Inputs y Selects */
+.form-field input[type="text"],
+.form-field input[type="password"],
+.form-field input[type="email"],
+.form-field input[type="number"],
+.form-field input[type="date"],
+.form-field select {
+    width: 100%;
+    padding: 12px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box; /* Importante para que el padding no rompa el layout */
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+    outline: none;
+    border-color: #6a1b9a; /* Púrpura */
+    box-shadow: 0 0 5px rgba(106, 27, 154, 0.2);
+}
+
+/* --- Grupo de Botones del Formulario --- */
+.button-group {
+    margin-top: 30px;
+    border-top: 1px solid #ecf0f1;
+    padding-top: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Botón Primario (Guardar, Registrar) */
+.button-primary,
+input[type="submit"] { /* Estiliza el submit por defecto */
+    background-color: #6a1b9a; /* Púrpura */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+.button-primary:hover,
+input[type="submit"]:hover {
+    background-color: #4a148c; /* Púrpura oscuro */
+}
+
+/* Botón Secundario (Ver Lista, Cancelar) */
+.button-secondary {
+    background-color: #f1f1f1;
+    color: #555;
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+.button-secondary:hover {
+    background-color: #e0e0e0;
+    border-color: #ccc;
+}
+
+
+/* --- ESTILOS PARA LA TABLA DE CONSULTAS (FN. 8, etc.) --- */
+.data-table {
+    width: 100%;
+    border-collapse: collapse; /* Bordes limpios */
+    margin-top: 20px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ecf0f1; /* Línea separadora sutil */
+}
+
+/* Cabecera de la tabla (como en el boceto) */
+.data-table th {
+    background-color: #f4f0f8; /* Púrpura muy claro */
+    color: #6a1b9a;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Filas de la tabla */
+.data-table tr:hover {
+    background-color: #fdfcff;
+}
+
+/* Botones de Acciones (Editar, Eliminar) */
+.btn-edit,
+.btn-delete {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-size: 0.9em;
+    margin-right: 5px;
+}
+.btn-edit {
+    background-color: #3498db; /* Azul */
+}
+.btn-delete {
+    background-color: #e74c3c; /* Rojo */
+}
+
+/* --- Adaptabilidad (Responsive) --- */
+@media (max-width: 768px) {
+    /* El formulario se vuelve de 1 columna en móviles */
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Oculta el sidebar en layout de móvil */
+    .sidebar {
+        display: none;
+    }
+    .main-content {
+        padding: 15px;
+    }
+}
+
+/* ... (tus estilos anteriores) ... */
+
+/* --- Estilos de Alertas / Mensajes --- */
+.form-alert {
+    margin-top: 20px;
+    padding: 12px 15px;
+    border-radius: 6px;
+    font-weight: 500;
+    text-align: center;
+    font-size: 0.95em;
+}
+
+.form-alert.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.form-alert.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.docentes-container {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+}
+
+#buscador-docentes {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95em;
+}
+
+/* Área con scroll para la lista de checkboxes */
+.scrollable-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+    max-height: 250px; /* Altura máxima para activar el scroll */
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Estilo de la etiqueta del docente */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    cursor: pointer;
+    color: #555;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/* Ajuste del tamaño del checkbox (requiere JS) */
+.checkbox-label input[type="checkbox"] {
+    margin-right: 8px;
+    width: auto !important;
+    transform: scale(1.2); 
+}
+
+/* Clase de utilidad para JavaScript */
+.hidden {
+    display: none !important;
+}
+
+.rubro-fila {
+    display: flex; /* Permite alinear el número, texto y botón en una fila */
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid var(--border-color); /* Usamos el borde del CRUD */
+    border-radius: 6px;
+    background-color: #fcfcfc;
+}
+
+/* Indicador de Orden (el 1., 2., 3.) */
+.rubro-order-display {
+    width: 40px;
+    font-weight: bold;
+    text-align: center;
+    flex-shrink: 0; /* Evita que el número se encoja */
+    color: var(--primary-color);
+}
+
+/* Etiqueta y Área de Texto */
+.rubro-fila label {
+    font-weight: 500;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+.rubro-fila textarea {
+    flex-grow: 1; /* Permite que el textarea ocupe el espacio restante */
+    margin-right: 15px;
+    border-radius: 4px;
+    padding: 8px;
+    min-height: 40px;
+}
+
+/* Nueva clase para botones pequeños en la rejilla (Eliminar, Quitar) */
+.btn-row-action {
+    padding: 6px 12px;
+    font-size: 0.9em;
+    flex-shrink: 0; 
+    margin-left: 10px; 
+    height: fit-content;
+    
+    /* Hereda de button-secondary para el estilo base */
+    background-color: var(--bg-color); 
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.btn-row-action.btn-delete {
+    background-color: var(--danger-color);
+    color: var(--danger-text);
+    border: 1px solid var(--danger-text);
+}
+.btn-row-action.btn-delete:hover {
+    background-color: var(--danger-text);
+    color: white;
+}
+
+/* Estilos de Utilidad */
+.button-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.text-center {
+    text-align: center !important;
+}
+.text-sm {
+    font-size: 0.9em;
+}
+.no-data {
+    color: #777;
+}
+
+/* Botones de Acción en Tablas */
+.btn-table-action {
+    /* Clases ya existentes: button-secondary, button-primary */
+    padding: 6px 12px; 
+    font-size: 0.85em; 
+    margin-right: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Badge Base para Estados */
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Clases de Estado */
+.badge-warning {
+    background-color: #fff3cd; /* Amarillo claro */
+    color: #856404; /* Texto marrón */
+    border: 1px solid #ffeeba;
+}
+
+.badge-success {
+    background-color: #d4edda; /* Verde claro */
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Estilo para Botón de Tarea Pendiente */
+.btn-pending {
+    background-color: #f0ad4e !important;
+    color: white !important;
+}
+.btn-pending:hover {
+    background-color: #da9634 !important;
+    color: white !important;
+}
+
+/* Clase de Utilidad para texto fuerte */
+.text-strong {
+    font-weight: 600;
+}
+
+/* Estilo para el formulario GET */
+.form-filter {
+    padding-top: 10px;
+}
+
+/* Estilo para el resumen de resultados */
+.result-summary {
+    text-align: right;
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 0.9em;
+    color: var(--primary-color);
+}
+
+/* --- Estilos para Reporte de Avance (Barra de Progreso) --- */
+
+.progress-bar-container {
+    width: 90%; /* Ajustado para que no toque los bordes */
+    background-color: #e9ecef;
+    border-radius: 6px;
+    height: 20px;
+    margin: 5px auto;
+    overflow: hidden; /* Esconde el contenido que se sale de la barra */
+}
+
+.progress-bar {
+    /* Color principal: Verde (Completado) */
+    background-color: #2ecc71; 
+    height: 100%;
+    line-height: 20px;
+    color: white;
+    text-align: center;
+    font-size: 0.85em;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: width 0.5s ease; /* Transición suave */
+}
+
+/* Barra para indicar bajo avance */
+.progress-bar-pending {
+    background-color: #ffc107 !important; /* Amarillo/Naranja (Advertencia) */
+}
+

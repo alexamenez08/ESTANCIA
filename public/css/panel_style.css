@@ -1,0 +1,204 @@
+/* --- Configuración Global --- */
+
+html {
+    scroll-behavior: smooth; /* <-- AÑADE ESTA LÍNEA */
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f7fb; /* Fondo gris/púrpura muy claro del boceto */
+    color: #333;
+}
+
+/* --- Contenedor Principal (Sidebar + Contenido) --- */
+.main-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- Barra Lateral (Sidebar) --- */
+.sidebar {
+    width: 260px;
+    background-color: #ffffff; /* Fondo blanco para el sidebar */
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 10px 0 20px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+.sidebar-header .logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #6a1b9a; /* Púrpura de UPEMOR */
+    display: block;
+}
+.sidebar-header .logo-sub {
+    font-size: 0.9em;
+    color: #888;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: #555;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.sidebar-link:hover {
+    background-color: #f4f0f8; /* Púrpura muy claro al pasar el mouse */
+    color: #6a1b9a;
+}
+
+.sidebar-link.active {
+    background-color: #6a1b9a; /* Púrpura principal */
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(106, 27, 154, 0.3);
+}
+
+/* --- Área de Contenido Principal --- */
+.main-content {
+    flex: 1;
+    padding: 25px 40px;
+    overflow-y: auto;
+}
+
+/* --- Cabecera del Módulo --- */
+.module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+.module-header h1 {
+    margin: 0;
+    font-size: 1.6em;
+    color: #333;
+    font-weight: 600;
+}
+.module-header p {
+    margin: 0;
+    font-size: 1.1em;
+    color: #777;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.user-info span {
+    font-weight: 500;
+    color: #555;
+    background-color: #f4f0f8;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.logout-link {
+    text-decoration: none;
+    color: #d9534f; /* Rojo para cerrar sesión */
+    font-weight: 500;
+}
+.logout-link:hover {
+    text-decoration: underline;
+}
+
+/* --- Tarjetas de Contenido (Cards) --- */
+.card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+.card h2 {
+    font-size: 1.4em;
+    color: #34495e;
+    border-bottom: 1px solid #ecf0f1;
+    padding-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+/* --- Rejilla de Botones (Enlaces) --- */
+.module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.button-link {
+    display: block;
+    text-decoration: none;
+    background-color: #7c3aed; /* Púrpura brillante */
+    color: white;
+    padding: 18px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.button-link:hover {
+    background-color: #ffffff;
+    color: #7c3aed;
+    border: 2px solid #7c3aed;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Botones alternativos (DB) */
+.button-link.button-alt {
+    background-color: #9b59b6; /* Púrpura más oscuro */
+}
+.button-link.button-alt:hover {
+    color: #9b59b6;
+    border-color: #9b59b6;
+    background-color: #ffffff;
+}
+
+/* --- Mensajes de Rol (del PHP) --- */
+.role-message {
+    font-size: 1.1em;
+    font-weight: 500;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.role-admin {
+    background-color: #fdeded;
+    border: 1px solid #e74c3c;
+    color: #c0392b;
+}
+.role-coord {
+    background-color: #eaf5fc;
+    border: 1px solid #3498db;
+    color: #2980b9;
+}
+.role-prof {
+    background-color: #eafcf1;
+    border: 1px solid #2ecc71;
+    color: #27ae60;
+}

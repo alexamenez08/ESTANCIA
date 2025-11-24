@@ -1,0 +1,266 @@
+:root {
+    /* Paleta de Colores Dark Mode */
+    --color-bg-main: #141625; /* Fondo principal */
+    --color-bg-card: #1e2139; /* Fondo de tarjetas, formularios y tablas */
+    --color-primary: #7c5dfa; /* Púrpura principal (header, enfoque) */
+    --color-primary-dark: #6850d5; /* Púrpura oscuro (tablas header) */
+    --color-secondary: #00bcd4; /* Cian (Editar, acento) */
+    --color-text-main: #ffffff; /* Texto principal */
+    --color-text-secondary: #888eb0; /* Texto secundario (labels) */
+    --color-border: #3f3f6e; /* Borde y separadores */
+    --color-success: #00c49f; /* Verde (Insertar, Submit) */
+    --color-danger: #ef5350; /* Rojo (Eliminar) */
+
+    /* Colores Específicos para el Login */
+    --login-header-bg: #FFFFFF; /* Fondo blanco para el encabezado de login */
+    --login-header-text: #333333; /* Texto oscuro para el encabezado de login */
+    --login-form-bg: #FFFFFF; /* Fondo blanco para el formulario de login */
+    --login-form-text: #333333; /* Texto oscuro para el formulario de login */
+    --login-input-bg: #F5F5F5; /* Fondo de input más claro en login */
+    --login-input-border: #E0E0E0; /* Borde de input más claro en login */
+    --login-button-bg: #7C5DFA; /* Botón de login púrpura */
+    --login-button-hover: #6850d5; /* Hover del botón de login */
+    --login-error-bg: #FEEBEB; /* Fondo de error de login (rosa claro) */
+    --login-error-text: #D0021B; /* Texto de error de login (rojo intenso) */
+    --login-policy-text: #B0B0B0; /* Texto de política más claro */
+
+    /* Colores para FORMULARIOS DE REGISTRO/EDICIÓN (Diseño de la última imagen) */
+    --form-bg-main: #f8f9fa; /* Fondo de la página */
+    --form-bg-card: #ffffff; /* Fondo de la tarjeta (Blanco) */
+    --form-text-main: #333333; /* Texto principal (Oscuro) */
+    --form-text-secondary: #888eb0; /* Texto secundario (Labels/Gris) */
+    --form-input-bg: #FAFAFA; /* Fondo de input ligeramente gris */
+}
+
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #000000;
+    margin: 0;
+    padding: 30px 5%;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-wrapper {
+    max-width: 500px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.login-header-card {
+    background: var(--login-header-bg);
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.login-logo {
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-primary); 
+    border-radius: 50%;
+    margin-right: 20px;
+    flex-shrink: 0; 
+}
+
+.login-title-group {
+    text-align: left;
+    color: var(--login-header-text);
+}
+
+.login-title-group h2 {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.login-title-group p {
+    margin: 0;
+    font-size: 0.8em;
+    color: #666666;
+}
+
+.login-form-card {
+    background: var(--login-form-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-form-card h1 {
+    color: var(--login-form-text);
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    border-bottom: none; /* Eliminar borde del h1 en el login */
+    font-weight: 700;
+}
+
+.login-form-card .subtitle {
+    color: var(--color-text-secondary);
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+
+.login-form-card label {
+    display: block;
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--login-form-text);
+}
+
+.login-form-card input[type="text"],
+.login-form-card input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--login-input-border);
+    border-radius: 8px;
+    background-color: var(--login-input-bg);
+    color: var(--login-form-text);
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.login-form-card input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(124, 93, 250, 0.2);
+    outline: none;
+}
+
+.login-form-card input[type="submit"] {
+    background-color: var(--login-button-bg);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.login-form-card input[type="submit"]:hover {
+    background-color: var(--login-button-hover);
+    transform: translateY(-1px);
+}
+
+/* Mensaje de error */
+.login-error-message {
+    background-color: var(--login-error-bg);
+    color: var(--login-error-text);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid rgba(208, 2, 27, 0.2);
+}
+
+
+/* forms */
+h1 { /* Título de la página de registro/consulta */
+    color: var(--form-text-main);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 2em;
+    border-bottom: none; 
+}
+
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--form-bg-card);
+    padding: 15px 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+.form-card {
+    background: var(--form-bg-card);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+.form-card h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--form-text-main);
+}
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px 40px; 
+    margin-bottom: 30px;
+}
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--form-text-secondary); 
+    font-size: 0.9em;
+}
+
+/* Estilos de inputs (se aplican a login y form-card, pero el color de fondo varía) */
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    /* Diferencia sutil de color de fondo */
+    background-color: var(--form-input-bg);
+    color: var(--form-text-main);
+}
+.login-form-card input, .login-form-card select {
+    background-color: var(--login-input-bg);
+}
+
+/*tablas */
+/* Estilos para botones de formulario (Guardar/Cancelar) */
+.button-group {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.back-btn {
+    background-color: #B0B0B0; /* Gris para "Cancelar" */
+}
+.back-btn:hover {
+    background-color: #999999;
+}
