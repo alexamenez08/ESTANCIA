@@ -7,7 +7,7 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Periodo</title>
+    <title>Editar Período</title>
     <!-- Enlazamos los estilos -->
     <link rel="stylesheet" href="public/css/panel_style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="public/css/crud_style.css?v=<?php echo time(); ?>">
@@ -25,7 +25,7 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
             <ul class="sidebar-menu">
                 <!-- ... otros enlaces ... -->
                 <!-- Marcamos Periodos como activo -->
-                <li><a href="index.php?controlador=periodo&accion=consultarPeriodos" class="sidebar-link active">Periodos</a></li>
+                <li><a href="index.php?controlador=periodo&accion=consultarPeriodos" class="sidebar-link active">Períodos</a></li>
                 <!-- ... otros enlaces ... -->
             </ul>
         </nav>
@@ -36,7 +36,7 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
             <!-- Cabecera -->
             <header class="module-header">
                 <div class="header-title">
-                    <h1>Módulo: Gestión de Periodos</h1>
+                    <h1>Módulo: Gestión de Períodos</h1>
                     <p>Editando: <strong><?php echo htmlspecialchars($periodo_data['nombre']); ?></strong></p>
                 </div>
                 <div class="user-info">
@@ -47,7 +47,7 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
             <!-- Tarjeta del Formulario -->
             <form action="index.php?controlador=periodo&accion=editarPeriodo&id=<?php echo $periodo_data['id_periodo']; ?>" method="POST" class="form-card">
                 
-                <h2>Actualizar Periodo Académico</h2>
+                <h2>Actualizar Período Académico</h2>
                 <p class="form-subtitle">Modifique el nombre o las fechas del ciclo.</p>
 
                 <!-- Mensaje de Error (si existe) -->

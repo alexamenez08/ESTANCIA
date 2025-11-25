@@ -12,9 +12,9 @@ class ProfesorPanelController {
         $this->materiaModel = new MateriaModel($connection); 
     }
     
-    // --- ACCIÓN 1: VER PERFIL PROPIO ---
+    // VER PERFIL PROPIO
     public function verPerfil() {
-        // 🔑 Obtenemos el ID del profesor logueado
+        // Obtenemos el ID del profesor logueado
         $id_profesor_logueado = $_SESSION['id_profesor'] ?? 0; 
         
         if ($id_profesor_logueado === 0) {
@@ -32,14 +32,14 @@ class ProfesorPanelController {
         include_once "app/views/profesor/perfil.php";
     }
 
-    // --- ACCIÓN 2: SEGUIMIENTO DE EVALUACIONES ---
+    // SEGUIMIENTO DE EVALUACIONES
     public function seguimientoEvaluaciones() {
         $id_profesor_logueado = $_SESSION['id_profesor'] ?? 0; // Si no existe, es 0
         if ($id_profesor_logueado === 0) {
             die("Error: Sesión inválida."); 
         }
 
-        // Asumimos que la función consultarEvaluacionesPropias está en UserModel
+        //la función consultarEvaluacionesPropias está en UserModel
         $evaluaciones = $this->userModel->consultarEvaluacionesPropias($id_profesor_logueado);
 
         include_once "app/views/profesor/seguimiento.php";

@@ -7,7 +7,7 @@ $rol_actual = $_SESSION['rol_usuario'] ?? 'Usuario';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta de Periodos</title>
+    <title>Consulta de Períodos</title>
     <!-- Enlazamos los estilos del panel y del CRUD -->
     <link rel="stylesheet" href="public/css/panel_style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="public/css/crud_style.css?v=<?php echo time(); ?>">
@@ -25,7 +25,7 @@ $rol_actual = $_SESSION['rol_usuario'] ?? 'Usuario';
             </div>
             <ul class="sidebar-menu">
                 <!-- ... otros enlaces ... -->
-                <li><a href="index.php?controlador=periodo&accion=consultarPeriodos" class="sidebar-link active">Periodos</a></li>
+                <li><a href="index.php?controlador=periodo&accion=consultarPeriodos" class="sidebar-link active">Períodos</a></li>
                 <!-- ... otros enlaces ... -->
             </ul>
         </nav>
@@ -36,7 +36,7 @@ $rol_actual = $_SESSION['rol_usuario'] ?? 'Usuario';
             <!-- Cabecera -->
             <header class="module-header">
                 <div class="header-title">
-                    <h1>Módulo: Gestión de Periodos</h1>
+                    <h1>Módulo: Gestión de Períodos</h1>
                     <p>Consulta y administración de los ciclos académicos.</p>
                 </div>
                 <div class="user-info">
@@ -49,7 +49,7 @@ $rol_actual = $_SESSION['rol_usuario'] ?? 'Usuario';
             <div class="form-card">
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h2>Consulta de Periodos Académicos</h2>
+                    <h2>Consulta de Períodos Académicos</h2>
                     <!-- Botón para ir a registrar nueva -->
                     <a href="index.php?controlador=periodo&accion=insertarPeriodo" class="button-primary" style="padding: 10px 20px; font-size: 0.95em;">
                         + Registrar Nuevo Período

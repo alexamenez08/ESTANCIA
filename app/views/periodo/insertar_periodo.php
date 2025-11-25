@@ -7,7 +7,7 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Periodo</title>
+    <title>Registro de Período</title>
     <!-- Enlazamos los estilos del panel y del CRUD -->
     <link rel="stylesheet" href="public/css/panel_style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="public/css/crud_style.css?v=<?php echo time(); ?>">
@@ -36,7 +36,7 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
             <!-- Cabecera -->
             <header class="module-header">
                 <div class="header-title">
-                    <h1>Módulo: Gestión de Periodos</h1>
+                    <h1>Módulo: Gestión de Períodos</h1>
                     <p>Registro y administración de los ciclos académicos.</p>
                 </div>
                 <div class="user-info">
@@ -80,7 +80,7 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                     <input type="submit" name="enviar_periodo" value="Registrar Período" class="button-primary">
                     
                     <a href="index.php?controlador=periodo&accion=consultarPeriodos" class="button-secondary">
-                        Ver Periodos
+                        Ver Períodos
                     </a>
                 </div>
             </form>

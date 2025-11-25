@@ -99,7 +99,7 @@
 
         public function eliminarUsuario(){
             
-            // 🔒 SEGURIDAD DE BACKEND: Validar Rol
+            // SEGURIDAD DE BACKEND: Validar Rol
             // Si NO es administrador, lo expulsamos de esta función.
             if ($_SESSION['rol_usuario'] != 'Administrador') {
                 // Opcional: Puedes mandar un mensaje de error
@@ -122,13 +122,9 @@
                 }
             }
         }
-
-        // --- AÑADIR ESTA ACCIÓN DENTRO DE class UserController ---
     
-    /**
-     * Acción para FN. 8: Consulta de profesores por academia.
-     * Muestra la vista con filtros y resultados.
-     */
+    /** Consulta de profesores por academia.
+     * Muestra la vista con filtros y resultados. */
     public function consultarPorAcademia() {
         
         // 1. Obtener todas las academias para el <select>
@@ -147,8 +143,7 @@
         include "app/views/usuario/consulta_por_academia.php";
     }
 
-    /**
-     * Acción para FN. 9: Consulta de profesores por materia.
+    /** Consulta de profesores por materia.
      */
     public function consultarPorMateria() {
         
