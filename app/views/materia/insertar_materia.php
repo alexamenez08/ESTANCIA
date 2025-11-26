@@ -1,6 +1,6 @@
 <?php
-// Obtener datos de sesión
-$rol = $_SESSION['rol_usuario'] ?? 'Usuario';
+    // Obtener datos de sesión
+    $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -8,7 +8,6 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Materia</title>
-    <!-- Estilos -->
     <link rel="stylesheet" href="public/css/panel_style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="public/css/crud_style.css?v=<?php echo time(); ?>">
 </head>
@@ -16,7 +15,6 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
 
     <div class="main-container">
         
-        <!-- ===== SIDEBAR ===== -->
         <nav class="sidebar">
             <div class="sidebar-header">
                 <span class="logo">UPEMOR</span>
@@ -27,10 +25,8 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
             </ul>
         </nav>
 
-        <!-- ===== CONTENIDO ===== -->
         <div class="main-content">
             
-            <!-- Cabecera -->
             <header class="module-header">
                 <div class="header-title">
                     <h1>Módulo: Gestión de Materias</h1>
@@ -42,14 +38,12 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                 </div>
             </header>
 
-            <!-- Mensaje de Error (si existe) -->
             <?php if(!empty($error)): ?>
                 <div class="form-alert error">
                     <?php echo htmlspecialchars($error); ?>
                 </div>
             <?php endif; ?>
 
-            <!-- Tarjeta del Formulario -->
             <form action="index.php?controlador=materia&accion=insertarMateria" method="POST" class="form-card">
                 <h2>Registrar Nueva Materia</h2>
                 <p class="form-subtitle">Complete la información de la materia y seleccione a los docentes que la imparten.</p>
@@ -87,7 +81,6 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                         <label>Docentes que imparten esta materia (Seleccione uno o más):</label>
                         
                         <div class="docentes-container">
-                            <!-- Buscador JS -->
                             <input type="text" id="buscador-docentes" placeholder="🔍 Buscar docente por nombre o apellido...">
                             
                             <div class="scrollable-grid" id="lista-docentes">
@@ -96,7 +89,6 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                                     while($p = $profesores->fetch_assoc()): 
                                         $nombre_completo = htmlspecialchars($p['nombre'].' '.$p['apellido_pa'].' '.$p['apellido_ma']);
                                 ?>
-                                    <!-- Añadimos data-name para facilitar la búsqueda con JS -->
                                     <label class="checkbox-label" data-name="<?php echo strtolower($nombre_completo); ?>">
                                         <input type="checkbox" name="profesores[]" value="<?php echo $p['id_profesor']; ?>">
                                         <?php echo $nombre_completo; ?>
@@ -105,16 +97,14 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                                     endwhile; 
                                 else:
                                 ?>
-                                    <p style="color: #777; font-style: italic;">No hay profesores registrados.</p>
+                                    <p class="no-professors-message">No hay profesores registrados.</p>
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <p style="font-size: 0.8em; color: #777; margin-top: 5px;">Use el buscador para filtrar la lista si hay muchos docentes.</p>
+                        <p class="search-note-text">Use el buscador para filtrar la lista si hay muchos docentes.</p>
                     </div>
 
-                </div> <!-- fin form-grid -->
-
-                <div class="button-group">
+                </div> <div class="button-group">
                     <input type="submit" name="registrar_materia" value="Registrar Materia" class="button-primary">
                     
                     <a href="index.php?controlador=materia&accion=consultarMaterias" class="button-secondary">
@@ -123,11 +113,7 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                 </div>
             </form>
 
-        </div> <!-- fin main-content -->
-    </div> <!-- fin main-container -->
-
-    <!-- SCRIPT PARA EL BUSCADOR DE DOCENTES -->
-    <script>
+        </div> </div> <script>
         document.addEventListener('DOMContentLoaded', function() {
             const buscador = document.getElementById('buscador-docentes');
             const lista = document.getElementById('lista-docentes');
@@ -136,6 +122,8 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
 
             // Función para quitar acentos y caracteres especiales
             function normalizarTexto(texto) {
+                // Se asegura de que el texto sea una cadena antes de normalizar
+                if (typeof texto !== 'string') return '';
                 return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
             }
 
@@ -148,11 +136,10 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                     const nombreProfesor = normalizarTexto(label.getAttribute('data-name'));
                     
                     // Si el nombre incluye el texto buscado, mostrar. Si no, ocultar.
-                    // Ocultamos añadiendo style.display = 'none' directamente para asegurar compatibilidad
                     if (nombreProfesor.includes(textoBuscado)) {
                         label.style.display = ""; // Mostrar (volver al default del CSS)
                     } else {
-                        label.style.display = "none"; // Ocultar
+                        label.style.display = "none"; // Ocultar (usando estilo en línea, la única forma aquí)
                     }
                 });
             });

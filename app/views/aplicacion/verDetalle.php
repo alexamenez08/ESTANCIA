@@ -8,7 +8,6 @@ $rol_actual = $_SESSION['rol_usuario'] ?? 'Usuario';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle de Evaluación</title>
-    <!-- Enlazamos los estilos del panel y del CRUD -->
     <link rel="stylesheet" href="public/css/panel_style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="public/css/crud_style.css?v=<?php echo time(); ?>">
 </head>
@@ -48,7 +47,7 @@ $rol_actual = $_SESSION['rol_usuario'] ?? 'Usuario';
                     </tr>
                     <tr>
                         <th class="detalle-header">Profesor Evaluado</th>
-                        <!-- 🔑 CORRECCIÓN: Usando los tres campos de nombre y apellido -->
+                        <!--  CORRECCIÓN: Usando los tres campos de nombre y apellido -->
                         <td><?php echo htmlspecialchars($datos['profesor_nombre'] . ' ' . $datos['profesor_apellido_pa'] . ' ' . $datos['profesor_apellido_ma']); ?></td>
                     </tr>
                     <tr>

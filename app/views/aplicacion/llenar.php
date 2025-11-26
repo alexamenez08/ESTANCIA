@@ -16,14 +16,12 @@ $fecha_actual = date('Y-m-d');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplicar Instrumento</title>
-    <!-- Incluye tus estilos externos -->
     <link rel="stylesheet" href="public/css/panel_style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="public/css/crud_style.css?v=<?php echo time(); ?>">
 </head>
 <body>
     
     <div class="main-container">
-        <!-- Contenido principal -->
         <div class="main-content">
             
             <header class="module-header">
@@ -34,12 +32,10 @@ $fecha_actual = date('Y-m-d');
             <form action="index.php?controlador=aplicacion&accion=guardarAplicacion" method="POST" class="form-card">
                 <input type="hidden" name="id_aplicacion" value="<?php echo $aplicacion['id_aplicacion']; ?>">
                 
-                <!-- Campo oculto para el número de rubros (usado por JS) -->
                 <input type="hidden" id="num_rubros" value="<?php echo count($rubros); ?>">
 
-                <!-- 1. DATOS DE LA EVALUACIÓN (Metadatos) -->
                 <h3>DATOS DE LA EVALUACIÓN</h3>
-                <div class="form-grid" style="grid-template-columns: repeat(4, 1fr);">
+                <div class="form-grid signatures-grid">
                     
                     <div class="form-field">
                         <label>Docente a evaluar</label>
@@ -72,11 +68,10 @@ $fecha_actual = date('Y-m-d');
                     </div>
                 </div>
                 
-                <hr style="margin: 20px 0;">
+                <hr class="section-separator">
 
-                <!-- 2. INSTRUCCIONES -->
                 <h3>INSTRUCCIONES</h3>
-                <ol style="padding-left: 20px; font-size: 0.9em; color: #555;">
+                <ol class="instruction-list">
                     <li>Lea cuidadosamente cada aspecto a observar antes de iniciar la evaluación.</li>
                     <li>Observe el desarrollo de la clase completa considerando los criterios establecidos.</li>
                     <li>Asigne un puntaje objetivo por cada aspecto con base en la evidencia observada.</li>
@@ -87,13 +82,12 @@ $fecha_actual = date('Y-m-d');
                     <li>Recabe las firmas de conformidad del evaluador y del personal docente.</li>
                 </ol>
                 
-                <hr style="margin: 20px 0;">
+                <hr class="section-separator">
 
-                <!-- 3. DETALLE DE RUBROS -->
                 <h3>Gestión de la asignatura (Aspectos a Observar)</h3>
-                <h5 style="margin-top: -15px; margin-bottom: 15px;">A cada aspecto a evaluar se le asignará el siguiente puntaje: 0 no cumple; 5 cumple parcialmente y 10 cumple satisfactoriamente</h5>
+                <h5 class="scale-header">A cada aspecto a evaluar se le asignará el siguiente puntaje: 0 no cumple; 5 cumple parcialmente y 10 cumple satisfactoriamente</h5>
                 
-                <table class="data-table" style="width: 100%;">
+                <table class="data-table">
                     <thead>
                         <tr>
                             <th style="width: 5%;">No.</th>
@@ -108,96 +102,90 @@ $fecha_actual = date('Y-m-d');
                         foreach ($rubros as $rubro): 
                         ?>
                             <tr>
-                                <td style="text-align: center;"><?php echo $contador++; ?></td>
+                                <td class="text-center"><?php echo $contador++; ?></td>
                                 <td><?php echo htmlspecialchars($rubro['texto_aspecto']); ?></td>
 
                                 <td>
-                                    <!-- 🔑 PUNTUACIÓN MÁXIMA CORREGIDA A 10 (con step 5) -->
                                     <input type="number" 
                                            class="puntaje-input"
                                            name="puntaje[<?php echo $rubro['id_rubro']; ?>]" 
                                            id="puntaje-<?php echo $rubro['id_rubro']; ?>"
                                            min="0" max="10" step="5" 
-                                           required style="width: 80px; text-align: center;">
+                                           required>
                                 </td>
                                 <td>
-                                    <textarea name="comentarios[<?php echo $rubro['id_rubro']; ?>]" rows="2" style="width: 95%;"></textarea>
+                                    <textarea name="comentarios[<?php echo $rubro['id_rubro']; ?>]" rows="2" class="retroalimentacion-textarea"></textarea>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
                 
-                <hr style="margin: 20px 0;">
+                <hr class="section-separator">
 
-                <!-- 4. PUNTAJE Y RETROALIMENTACIÓN FINAL -->
                 <h3>Puntaje y retroalimentación</h3>
 
-                <div class="form-grid" style="grid-template-columns: 1fr 2fr;">
+                <div class="form-grid signatures-grid">
                     
                     <div class="form-field">
                         <label for="puntaje_total">Puntaje obtenido (suma)</label>
-                        <!-- Campo donde JS calculará el total -->
-                        <input type="number" name="puntaje_total" id="puntaje_total" value="0" readonly style="font-weight: bold; width: 100%; padding: 10px;">
+                        <input type="number" name="puntaje_total" id="puntaje_total" value="0" readonly class="total-score-display">
                     </div>
                     
-                    <div class="form-field full-width" style="grid-column: 1 / -1;">
-                        <!-- 🔑 Regla dinámica -->
-                        <div id="regla-retroalimentacion" style="padding: 10px; border: 1px dashed gray; font-weight: bold; margin-bottom: 15px;">
+                    <div class="form-field full-width">
+                        <div id="regla-retroalimentacion" class="retro-message-box">
                             Calculando umbral...
                         </div>
                         
                         <label for="observaciones_generales">Retroalimentación al personal docente (Comentarios y observaciones clave)</label>
-                        <textarea name="observaciones_generales" id="observaciones_generales" rows="4" style="width: 99%;"></textarea>
+                        <textarea name="observaciones_generales" id="observaciones_generales" rows="4" class="retroalimentacion-textarea"></textarea>
                     </div>
                 </div>
 
-                <hr style="margin: 20px 0;">
+                <hr class="section-separator">
 
-                <!-- 5. FIRMAS (Nombres) -->
-                <h3>Firmas/Nombres</h3>
+                <h3>Nombres</h3>
                 
-                <div class="form-grid" style="grid-template-columns: 1fr 1fr; margin-top: 20px;">
+                <div class="form-grid signatures-grid">
                     
-                    <!-- Evaluador -->
-                    <div style="text-align: center;">
-                        <div style="font-weight: bold;"><?php echo $evaluador_nombre_completo; ?></div>
-                        <hr style="border: none; border-top: 1px solid black; margin-top: 50px;">
-                        <label style="display: block; margin-top: 5px; font-size: 0.9em;">Nombre del Coordinador(a)</label>
+                    <div class="signature-box">
+                        <div class="signature-name"><?php echo $evaluador_nombre_completo; ?></div>
+                        <label class="signature-label">Nombre del Coordinador(a)</label>
                     </div>
                     
-                    <!-- Evaluado -->
-                    <div style="text-align: center;">
-                        <div style="font-weight: bold;"><?php echo $profesor_nombre_completo; ?></div>
-                        <hr style="border: none; border-top: 1px solid black; margin-top: 50px;">
-                        <label style="display: block; margin-top: 5px; font-size: 0.9em;">Nombre del personal docente (Evaluado)</label>
+                    <div class="signature-box">
+                        <div class="signature-name"><?php echo $profesor_nombre_completo; ?></div>
+                        <label class="signature-label">Nombre del personal docente (Evaluado)</label>
                     </div>
                 </div>
 
-                <div class="button-group" style="margin-top: 40px; justify-content: center;">
-                    <button type="submit" name="guardar_aplicacion" class="button-primary" style="padding: 12px 30px;">Finalizar y Guardar Evaluación</button>
+                <div class="button-group button-center-group">
+                    <button type="submit" name="guardar_aplicacion" class="button-primary">Finalizar y Guardar Evaluación</button>
                 </div>
             </form>
         </div>
     </div>
     
-    <!-- SCRIPT PARA EL CÁLCULO DEL PUNTAJE TOTAL Y REGLA -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // 1. Elementos del DOM
             const totalInput = document.getElementById('puntaje_total');
             const puntajeInputs = document.querySelectorAll('.puntaje-input');
-            const numRubros = <?php echo count($rubros); ?>;
+            const numRubrosElement = document.getElementById('num_rubros');
             const retroContainer = document.getElementById('regla-retroalimentacion');
             const form = document.querySelector('form');
             
-            // --- REGLAS DE NEGOCIO ---
+            // Si numRubrosElement no existe o no tiene valor, asumimos 0
+            const numRubros = parseInt(numRubrosElement ? numRubrosElement.value : '0') || 0; 
+            
+            // --- 2. REGLAS DE NEGOCIO ---
             const MAX_PUNTAJE_POR_RUBRO = 10;
             const UMBRAL_PORCENTAJE = 0.70; // 70% de aprobación
             const MIN_RUBROS_REQUERIDOS = 3; 
 
             // Cálculo dinámico del umbral
             const PUNTAJE_MAX_TOTAL = numRubros * MAX_PUNTAJE_POR_RUBRO;
-            const PUNTAJE_MINIMO_APROBACION = PUNTAJE_MAX_TOTAL * UMBRAL_PORCENTAJE; // 70% del total
+            const PUNTAJE_MINIMO_APROBACION = PUNTAJE_MAX_TOTAL * UMBRAL_PORCENTAJE;
             // -------------------------
 
             function calcularTotal() {
@@ -206,12 +194,13 @@ $fecha_actual = date('Y-m-d');
                 
                 puntajeInputs.forEach(input => {
                     const valor = parseFloat(input.value);
-                    if (!isNaN(valor) && input.value !== "") { // Valor válido
+                    if (!isNaN(valor) && input.value !== "") {
                         total += valor;
                         rubrosCompletados++;
                     }
                 });
                 
+                // Muestra el total
                 totalInput.value = total.toFixed(2); 
 
                 mostrarRegla(total, rubrosCompletados);
@@ -219,29 +208,29 @@ $fecha_actual = date('Y-m-d');
 
             function mostrarRegla(totalObtenido, rubrosCompletados) {
                 let mensaje = "";
-                let colorFondo = '';
-                let colorTexto = '';
-                
+                let className = 'retro-message-box'; // Clase base
+
+                // 1. Limpia clases de estado previas (ya no usamos style, usamos clases)
+                retroContainer.classList.remove('retro-error', 'retro-success', 'retro-warning');
+
+                // 2. Aplica la lógica de la regla
                 if (rubrosCompletados < MIN_RUBROS_REQUERIDOS) {
-                    mensaje = `Faltan rubros: Debe completar al menos ${MIN_RUBROS_REQUERIDOS} rubros de ${numRubros} para validar la evaluación.`;
-                    colorFondo = '#f8d7da';
-                    colorTexto = '#721c24';
+                    mensaje = ` Faltan rubros: Debe completar al menos ${MIN_RUBROS_REQUERIDOS} rubros de ${numRubros} para validar la evaluación.`;
+                    className += ' retro-error';
                 } else if (totalObtenido >= PUNTAJE_MINIMO_APROBACION) {
-                    mensaje = `🟢 Puntaje (${totalObtenido.toFixed(2)}): No se realiza plan de acción. (Umbral min: ${PUNTAJE_MINIMO_APROBACION.toFixed(2)})`;
-                    colorFondo = '#d4edda';
-                    colorTexto = '#155724';
+                    mensaje = ` Puntaje (${totalObtenido.toFixed(2)}): No se realiza plan de acción. (Umbral min: ${PUNTAJE_MINIMO_APROBACION.toFixed(2)})`;
+                    className += ' retro-success';
                 } else {
-                    mensaje = `🟡 Puntaje (${totalObtenido.toFixed(2)}): El personal docente deberá realizar plan de acción. (Umbral min: ${PUNTAJE_MINIMO_APROBACION.toFixed(2)})`;
-                    colorFondo = '#fff3cd';
-                    colorTexto = '#856404';
+                    mensaje = ` Puntaje (${totalObtenido.toFixed(2)}): El personal docente deberá realizar plan de acción. (Umbral min: ${PUNTAJE_MINIMO_APROBACION.toFixed(2)})`;
+                    className += ' retro-warning';
                 }
                 
-                retroContainer.style.backgroundColor = colorFondo;
-                retroContainer.style.color = colorTexto;
+                // 3. Aplica las clases y el mensaje
+                retroContainer.className = className;
                 retroContainer.innerHTML = mensaje;
             }
 
-            // 🔑 VALIDACIÓN FINAL DE ENVÍO
+            // 4. VALIDACIÓN FINAL DE ENVÍO
             form.addEventListener('submit', function(event) {
                 let rubrosCompletados = 0;
                 puntajeInputs.forEach(input => {
@@ -256,10 +245,12 @@ $fecha_actual = date('Y-m-d');
                 }
             });
 
+            // 5. Asignar eventos
             puntajeInputs.forEach(input => {
                 input.addEventListener('input', calcularTotal);
             });
 
+            // Calcular en la carga inicial
             calcularTotal();
         });
     </script>

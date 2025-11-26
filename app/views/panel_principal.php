@@ -2,9 +2,6 @@
 $rol = $_SESSION['rol_usuario'];
 $nombre = $_SESSION['nombre_usuario'];
 $id_profesor = $_SESSION['id_profesor'] ?? null; 
-
-// Determinar qué enlace del sidebar está activo (basado en el ancla)
-// Esto es opcional, pero mejora la UI. Requeriría JS para hacerlo dinámico al scrollear.
 $seccion_activa = $_GET['seccion'] ?? 'inicio';
 ?>
 <!DOCTYPE html>
@@ -26,11 +23,6 @@ $seccion_activa = $_GET['seccion'] ?? 'inicio';
             </div>
             <ul class="sidebar-menu">
                 
-                <!-- 
-                  Enlaces del Sidebar (ahora apuntan a IDs en la página)
-                  Estos enlaces se mostrarán según el ROL
-                -->
-                
                 <?php if($rol == 'Administrador'): ?>
                     <li><a href="#gestion-sistema" class="sidebar-link <?php echo ($seccion_activa == 'gestion-sistema') ? 'active' : ''; ?>">Gestión del Sistema</a></li>
                     <li><a href="#evaluacion-seguimiento" class="sidebar-link <?php echo ($seccion_activa == 'evaluacion-seguimiento') ? 'active' : ''; ?>">Evaluación y Seguimiento</a></li>
@@ -39,7 +31,6 @@ $seccion_activa = $_GET['seccion'] ?? 'inicio';
 
                 <?php elseif($rol == 'Coordinador'): ?>
                     <li><a href="#gestion-academica" class="sidebar-link active">Gestión Académica</a></li>
-                    <!-- Añadir más enlaces de ancla para el Coordinador si tiene más tarjetas -->
 
                 <?php else: // Profesor ?>
                     <li><a href="#perfil" class="sidebar-link active">Mi perfil</a></li>
@@ -105,7 +96,7 @@ $seccion_activa = $_GET['seccion'] ?? 'inicio';
                     <!-- Tarjeta de Base de Datos (Añadido ID) -->
                     <section class="card" id="base-de-datos">
                         <h2>Base de Datos</h2>
-                        <div class="module-grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
+                        <div class="module-grid">
                             <a href="index.php?controlador=respaldo&accion=realizarRespaldoBD" class="button-link button-alt">Respaldos</a>
                             <a href="index.php?controlador=respaldo&accion=restaurarBD" class="button-link button-alt">Restaurar</a>
                         </div>
@@ -124,26 +115,21 @@ $seccion_activa = $_GET['seccion'] ?? 'inicio';
                         </div>
                     </section>
 
-                    <!-- El coordinador también gestiona instrumentos y valida estados -->
                         <section class="card" id="evaluacion-seguimiento">
                             <h2>Evaluación y Seguimiento</h2>
                             <div class="module-grid">
-                                <!-- FN.4 – Gestión de instrumento: crear y editar formularios -->
                                 <a href="index.php?controlador=instrumento&accion=consultarInstrumentos" class="button-link">
                                     Gestión de Instrumentos
                                 </a>
-                                <!-- Asignar evaluaciones (FN relacionado) -->
                                 <a href="index.php?controlador=aplicacion&accion=asignar" class="button-link">
                                     Asignar Evaluación
                                 </a>
-                                <!-- Validar estado de aplicación: pendiente / en proceso / completado -->
                                 <a href="index.php?controlador=aplicacion&accion=consultarAplicaciones" class="button-link">
                                     Aplicar/Consultar Evaluaciones
                                 </a>
                             </div>
                         </section>
 
-                        <!-- Reutilizar también las consultas y reportes del admin -->
                         <section class="card" id="consultas-reportes">
                             <h2>Consultas y Reportes</h2>
                             <div class="module-grid">

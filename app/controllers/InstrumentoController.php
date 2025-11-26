@@ -2,6 +2,7 @@
     //* Incluir los modelos necesarios
     include_once "app/models/RubroModel.php";
     include_once "app/models/InstrumentoModel.php"; 
+    include_once "config/db_connection.php";
 
     //! Clase controladora para gestionar las acciones relacionadas con los Instrumentos y sus Rubros
     //! (Crear, Consultar, Editar Rubros y Eliminar Rubros).

@@ -24,10 +24,8 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
             </ul>
         </nav>
 
-        <!-- ===== CONTENIDO ===== -->
         <div class="main-content">
             
-            <!-- Cabecera -->
             <header class="module-header">
                 <div class="header-title">
                     <h1>Módulo: Gestión de Instrumentos</h1>
@@ -39,14 +37,12 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                 </div>
             </header>
 
-            <!-- Tarjeta del Formulario -->
             <form action="index.php?controlador=instrumento&accion=insertarInstrumento" method="POST" class="form-card">
                 
                 <h2>Creación de Instrumento</h2>
                 <p class="form-subtitle">Ingrese el nombre y una breve descripción del nuevo instrumento.</p>
 
-                <!-- Rejilla con 1 columna -->
-                <div class="form-grid" style="grid-template-columns: 1fr;"> 
+                <div class="form-grid one-column"> 
                     
                     <div class="form-field">
                         <label for="nombre">Nombre del Instrumento: *</label>
@@ -54,7 +50,6 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                     </div>
                 </div>
 
-                <!-- Campo de Descripción (Full Width) -->
                 <div class="form-field full-width">
                     <label for="descripcion">Descripción del Instrumento: *</label>
                     <textarea id="descripcion" name="descripcion" rows="4" required placeholder="Detalle el objetivo y el alcance del instrumento."></textarea>

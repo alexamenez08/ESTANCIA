@@ -8,7 +8,6 @@ $rol_actual = $_SESSION['rol_usuario'] ?? 'Usuario';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulta de Evaluaciones</title>
-    <!-- Enlazamos los estilos del panel y del CRUD -->
     <link rel="stylesheet" href="public/css/panel_style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="public/css/crud_style.css?v=<?php echo time(); ?>">
 </head>

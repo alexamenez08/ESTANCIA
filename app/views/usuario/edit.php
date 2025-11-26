@@ -2,7 +2,6 @@
 // Obtener el rol actual para las restricciones de seguridad
 $rol_actual = $_SESSION['rol_usuario'] ?? 'Profesor'; 
 
-// Asumimos que $row contiene los datos del usuario a editar
 $nombre_completo = htmlspecialchars($row['nombre'] . ' ' . $row['apellido_pa']);
 ?>
 <!DOCTYPE html>

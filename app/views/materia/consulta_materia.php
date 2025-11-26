@@ -1,6 +1,9 @@
 <?php
-// Obtener el rol para las restricciones de seguridad (Eliminar)
-$rol_actual = $_SESSION['rol_usuario'] ?? 'Profesor'; 
+    // Obtener el rol para las restricciones de seguridad (Eliminar)
+    $rol_actual = $_SESSION['rol_usuario'] ?? 'Profesor'; 
+    // Definimos las clases de los botones de acción
+    $clase_editar = 'btn-edit btn-small-link'; // Usamos el estilo púrpura/azul de edición
+    $clase_eliminar = 'btn-delete btn-small-link btn-delete-alert'; // Usamos el estilo de alerta rojo/rosa
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -8,16 +11,13 @@ $rol_actual = $_SESSION['rol_usuario'] ?? 'Profesor';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Materias</title>
-    <!-- Enlazamos los estilos del panel y del CRUD -->
     <link rel="stylesheet" href="public/css/panel_style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="public/css/crud_style.css?v=<?php echo time(); ?>">
 </head>
 <body>
 
-    <!-- Contenedor principal (Sidebar + Contenido) -->
     <div class="main-container">
         
-        <!-- ===== SIDEBAR ===== -->
         <nav class="sidebar">
             <div class="sidebar-header">
                 <span class="logo">UPEMOR</span>
@@ -28,10 +28,8 @@ $rol_actual = $_SESSION['rol_usuario'] ?? 'Profesor';
             </ul>
         </nav>
 
-        <!-- ===== CONTENIDO PRINCIPAL ===== -->
         <div class="main-content">
             
-            <!-- Cabecera del módulo -->
             <header class="module-header">
                 <div class="header-title">
                     <h1>Módulo: Gestión de Materias</h1>
@@ -43,18 +41,15 @@ $rol_actual = $_SESSION['rol_usuario'] ?? 'Profesor';
                 </div>
             </header>
 
-            <!-- Tarjeta de Consulta (Tabla) -->
             <div class="form-card">
                 
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div class="button-group-header">
                     <h2>Listado de Materias Registradas</h2>
-                    <!-- Botón para ir a registrar nueva -->
-                    <a href="index.php?controlador=materia&accion=insertarMateria" class="button-primary" style="padding: 10px 20px; font-size: 0.95em;">
+                    <a href="index.php?controlador=materia&accion=insertarMateria" class="button-primary btn-table-action">
                         + Registrar Materia
                     </a>
                 </div>
 
-                <!-- TABLA ESTILIZADA -->
                 <table class="data-table">
                     <thead>
                         <tr>
@@ -64,7 +59,7 @@ $rol_actual = $_SESSION['rol_usuario'] ?? 'Profesor';
                             <th>Créditos</th>
                             <th>Academia</th>
                             <th>Docentes Asignados</th>
-                            <th style="text-align: center;">Acciones</th>
+                            <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,38 +67,32 @@ $rol_actual = $_SESSION['rol_usuario'] ?? 'Profesor';
                         <?php while($r = $materias->fetch_assoc()): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($r['id_materia']); ?></td>
-                            <td style="font-weight: 600; color: var(--primary-color);"><?php echo htmlspecialchars($r['nombre_materia']); ?></td>
+                            <td class="materia-name"><?php echo htmlspecialchars($r['nombre_materia']); ?></td>
                             <td><?php echo htmlspecialchars($r['clave']); ?></td>
                             <td><?php echo (int)$r['creditos']; ?></td>
                             
-                            <!-- Academia -->
                             <td>
-                                <span style="font-weight: 500;">
+                                <span class="academia-name">
                                     <?php echo htmlspecialchars($r['academia'] ?? '— Sin asignar —'); ?>
                                 </span>
                             </td>
 
-                            <!-- Docentes (Usamos un div para que envuelva el texto largo si existe) -->
-                            <td style="font-size: 0.9em; max-width: 250px;">
-                                <div style="white-space: pre-wrap; word-wrap: break-word;">
+                            <td class="docentes-cell">
+                                <div class="docentes-text-wrap">
                                     <?php echo htmlspecialchars($r['docentes'] ?? '— Ninguno —'); ?>
                                 </div>
                             </td>
 
-                            <td style="text-align: center;">
+                            <td class="text-center">
                                 
-                                <!-- 🔑 BOTÓN EDITAR CORREGIDO -->
                                 <a href="index.php?controlador=materia&accion=editar&id=<?php echo $r['id_materia']; ?>" 
-                                   class="button-secondary"
-                                   style="padding: 5px 10px; font-size: 0.85em; margin-right: 5px; text-decoration: none;">
+                                   class="<?php echo $clase_editar; ?>">
                                     Editar
                                 </a>
 
-                                <!-- 🔑 BOTÓN ELIMINAR CORREGIDO (Restricción opcional si el rol no es Admin) -->
                                 <?php if ($rol_actual == 'Administrador'): ?>
                                     <a href="index.php?controlador=materia&accion=eliminar&id=<?php echo $r['id_materia']; ?>"
-                                       class="button-secondary"
-                                       style="padding: 5px 10px; font-size: 0.85em; color: #d9534f; background-color: #fdf2f2; border-color: #f5c6cb;"
+                                       class="<?php echo $clase_eliminar; ?>"
                                        onclick="return confirm('¿Eliminar la materia <?php echo htmlspecialchars($r['nombre_materia']); ?>?');">
                                         Eliminar
                                     </a>
@@ -112,18 +101,18 @@ $rol_actual = $_SESSION['rol_usuario'] ?? 'Profesor';
                         </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <tr><td colspan="7" style="text-align: center; padding: 30px; color: #777;">No hay materias registradas.</td></tr>
+                        <tr>
+                            <td colspan="7" class="no-data-cell-padding">No hay materias registradas.</td>
+                        </tr>
                     <?php endif; ?>
                     </tbody>
                 </table>
             </div>
             
             <br>
-            <a href="index.php?controlador=acceso&accion=panelPrincipal" style="text-decoration: none; color: #666; font-size: 0.9em;">
+            <a href="index.php?controlador=acceso&accion=panelPrincipal" class="back-to-panel">
                 &larr; Volver al Panel Principal
             </a>
 
-        </div> <!-- fin .main-content -->
-    </div> <!-- fin .main-container -->
-</body>
+        </div> </div> </body>
 </html>

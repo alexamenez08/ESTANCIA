@@ -8,7 +8,6 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Período</title>
-    <!-- Enlazamos los estilos del panel y del CRUD -->
     <link rel="stylesheet" href="public/css/panel_style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="public/css/crud_style.css?v=<?php echo time(); ?>">
 </head>
@@ -16,24 +15,18 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
 
     <div class="main-container">
         
-        <!-- ===== SIDEBAR ===== -->
         <nav class="sidebar">
             <div class="sidebar-header">
                 <span class="logo">UPEMOR</span>
                 <span class="logo-sub">Gestión Académica</span>
             </div>
             <ul class="sidebar-menu">
-                <!-- ... otros enlaces ... -->
-                <!-- Marcamos Periodos como activo -->
-                <li><a href="index.php?controlador=periodo&accion=consultarPeriodos" class="sidebar-link active">Periodos</a></li>
-                <!-- ... otros enlaces ... -->
+                <li><a href="index.php?controlador=periodo&accion=consultarPeriodos" class="sidebar-link active">Períodos</a></li>
             </ul>
         </nav>
 
-        <!-- ===== CONTENIDO ===== -->
         <div class="main-content">
             
-            <!-- Cabecera -->
             <header class="module-header">
                 <div class="header-title">
                     <h1>Módulo: Gestión de Períodos</h1>
@@ -45,19 +38,16 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                 </div>
             </header>
 
-            <!-- Tarjeta del Formulario -->
             <form action="index.php?controlador=periodo&accion=insertarPeriodo" method="POST" class="form-card">
                 <h2>Registrar Nuevo Período</h2>
                 <p class="form-subtitle">Ingrese el nombre y las fechas de inicio y fin del ciclo.</p>
 
-                <!-- Mensajes de Éxito/Error -->
                 <?php 
                 if (isset($exito_mensaje)) { echo '<div class="form-alert success">'.htmlspecialchars($exito_mensaje).'</div>'; }
                 if (isset($error_mensaje)) { echo '<div class="form-alert error">'.htmlspecialchars($error_mensaje).'</div>'; }
                 ?>
 
-                <!-- Rejilla del formulario -->
-                <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr;"> 
+                <div class="form-grid three-columns"> 
                     
                     <div class="form-field full-width">
                         <label for="nombre">Nombre del Período: *</label>
@@ -74,9 +64,7 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                         <input type="date" id="fecha_fin" name="fecha_fin" min="2025-09-04" max="2035-10-31" required>
                     </div>
 
-                </div> <!-- fin form-grid -->
-                
-                <div class="button-group">
+                </div> <div class="button-group">
                     <input type="submit" name="enviar_periodo" value="Registrar Período" class="button-primary">
                     
                     <a href="index.php?controlador=periodo&accion=consultarPeriodos" class="button-secondary">
@@ -85,8 +73,5 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                 </div>
             </form>
 
-        </div> <!-- fin main-content -->
-    </div> <!-- fin main-container -->
-    
-</body>
+        </div> </div> </body>
 </html>

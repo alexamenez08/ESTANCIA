@@ -8,7 +8,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/css/panel_style.css?v=<?php echo time(); ?>"> <!-- (Opcional: si quieres el fondo y layout) -->
     <link rel="stylesheet" href="public/css/crud_style.css?v=<?php echo time(); ?>">
     <title>Registrar Usuario</title>
 </head>
@@ -18,7 +17,6 @@
     <div class="main-container">
         
         <!-- ===== MENÚ LATERAL (SIDEBAR) FIJO ===== -->
-        <!-- (Este es el mismo sidebar que usamos en panel_principal.php) -->
         <nav class="sidebar">
             <div class="sidebar-header">
                 <span class="logo">UPEMOR</span>

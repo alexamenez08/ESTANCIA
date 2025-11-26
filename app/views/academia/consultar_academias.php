@@ -36,13 +36,13 @@
                     <span><?php echo htmlspecialchars($rol_actual); ?></span>
                     <a href="index.php?controlador=acceso&accion=cerrarSesion" class="logout-link">Cerrar Sesión</a>
                 </div>
-                </header>
+            </header>
 
             <div class="form-card">
                 
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div class="button-group-header">
                     <h2>Listado de Academias Registradas</h2>
-                    <a href="index.php?controlador=academia&accion=insertarAcademia" class="button-primary" style="padding: 10px 20px; font-size: 0.95em;">
+                    <a href="index.php?controlador=academia&accion=insertarAcademia" class="button-primary btn-table-action">
                         + Registrar Academia
                     </a>
                 </div>
@@ -53,61 +53,61 @@
                             <th style="width: 10%;">ID</th>
                             <th style="width: 50%;">Nombre</th>
                             <th style="width: 20%;">Siglas</th>
-                            <th style="width: 20%; text-align: center;">Acciones</th>
+                            <th class="text-center" style="width: 20%;">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         if (isset($academias) && $academias->num_rows > 0) {
                             while($row = $academias->fetch_assoc()){
-                        ?>        
-                            <tr>
-                                <td><?php echo htmlspecialchars($row['id_academia']); ?></td>
-                                <td style="font-weight: 500;"><?php echo htmlspecialchars($row['nombre']); ?></td>
-                                <td>
-                                    <span style="background-color: #eafcf1; color: #27ae60; padding: 4px 8px; border-radius: 4px; font-size: 0.9em; font-weight: 600;">
-                                        <?php echo htmlspecialchars($row['siglas']); ?>
-                                    </span>
-                                </td>
-                                <td style="text-align: center;">
-                                    
-                                    <a href="index.php?controlador=academia&accion=editarAcademia&id=<?php echo $row['id_academia'];?>" 
-                                       class="button-secondary"
-                                       style="padding: 5px 10px; font-size: 0.85em; margin-right: 5px; text-decoration: none;">
-                                        Editar
-                                    </a>
-                                    
-                                    <a href="index.php?controlador=academia&accion=eliminarAcademia&id=<?php echo $row['id_academia'];?>" 
-                                       class="button-secondary"
-                                       style="padding: 5px 10px; font-size: 0.85em; color: #d9534f; background-color: #fdf2f2; border-color: #f5c6cb;"
-                                       onclick="return confirm('¿Estás seguro de que deseas eliminar la academia: <?php echo htmlspecialchars($row['nombre']); ?>?');">
-                                        Eliminar
-                                    </a>
+                        ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($row['id_academia']); ?></td>
+                                    <td class="academy-name"><?php echo htmlspecialchars($row['nombre']); ?></td>
+                                    <td>
+                                        <span class="badge badge-success badge-siglas">
+                                            <?php echo htmlspecialchars($row['siglas']); ?>
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        
+                                        <a href="index.php?controlador=academia&accion=editarAcademia&id=<?php echo $row['id_academia'];?>" 
+                                           class="btn-edit btn-small-link">
+                                            Editar
+                                        </a>
+                                        
+                                        <a href="index.php?controlador=academia&accion=eliminarAcademia&id=<?php echo $row['id_academia'];?>" 
+                                           class="button-secondary btn-delete"
+                                           onclick="return confirm('¿Estás seguro de que deseas eliminar la academia: <?php echo htmlspecialchars($row['nombre']); ?>?');">
+                                            Eliminar
+                                        </a>
 
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
 
                         <?php
                             }
                         } else {
                         ?>
                             <tr>
-                                <td colspan="4" style="text-align: center; padding: 30px; color: #777;">
+                                <td colspan="4" class="text-center no-data no-data-cell">
                                     No hay academias registradas en el sistema.
                                 </td>
                             </tr>
                         <?php
                         }
-                        ?>    
+                        ?>
                     </tbody>
                 </table>
 
             </div>
             
             <br>
-            <a href="index.php?controlador=acceso&accion=panelPrincipal" style="text-decoration: none; color: #666; font-size: 0.9em;">
+            <a href="index.php?controlador=acceso&accion=panelPrincipal" class="back-to-panel">
                 &larr; Volver al Panel Principal
             </a>
 
-        </div> </div> </body>
+        </div> 
+    </div> 
+</body>
 </html>

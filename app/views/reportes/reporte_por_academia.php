@@ -8,14 +8,12 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporte de Avance por Academia</title>
-    <!-- Enlazamos los estilos del panel y del CRUD -->
     <link rel="stylesheet" href="public/css/panel_style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="public/css/crud_style.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <div class="main-container">
         
-        <!-- ===== SIDEBAR (Placeholder) ===== -->
         <nav class="sidebar">
             <div class="sidebar-header">
                 <span class="logo">UPEMOR</span>
@@ -26,7 +24,6 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
             </ul>
         </nav>
 
-        <!-- ===== CONTENIDO ===== -->
         <div class="main-content">
             
             <header class="module-header">
@@ -40,44 +37,40 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                 </div>
             </header>
 
-            <!-- Tarjeta de Consulta -->
             <div class="form-card">
                 <h3>Reporte: Avance de Aplicaciones por Academia</h3>
                 <p class="form-subtitle">Muestra el total de evaluaciones asignadas vs. las completadas de cada academia.</p>
                 
                 <div class="button-group">
-                    <!-- Botón de Descarga -->
                     <a href="index.php?controlador=report&accion=generarReporteAcademiaPDF" class="button-primary">
                         Descargar PDF
                     </a>
                 </div>
 
-                <!-- TABLA DE RESULTADOS -->
                 <table class="data-table">
                     <thead>
                         <tr>
                             <th>Academia</th>
                             <th class="text-center">Completadas</th>
                             <th class="text-center">Total Asignadas</th>
-                            <th class="col-avance">Porcentaje de Avance</th>
+                            <th class="col-avance">Porcentaje de Avance</th> 
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
                         if (isset($estadisticas) && $estadisticas->num_rows > 0):
+                            // Reiniciamos el puntero para la impresión si fuera necesario
+                            $estadisticas->data_seek(0); 
                             while($stat = $estadisticas->fetch_assoc()):
                                 
                                 $completadas = (int)$stat['total_completadas'];
                                 $asignadas = (int)$stat['total_asignadas'];
                                 $porcentaje = 0;
                                 
+                                // Lógica de cálculo (se mantiene en PHP)
                                 if ($asignadas > 0) {
                                     $porcentaje = ($completadas / $asignadas) * 100;
-                                } else {
-                                    $porcentaje = 0; 
-                                }
-                                
-                                if ($asignadas == 0 && $completadas > 0) {
+                                } elseif ($completadas > 0) { 
                                     $porcentaje = 100;
                                 }
 
@@ -87,10 +80,9 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
                                 <td class="text-center"><?php echo $completadas; ?></td>
                                 <td class="text-center"><?php echo $asignadas; ?></td>
                                 <td>
-                                    <!-- Barra de Progreso Visual -->
                                     <div class="progress-bar-container">
                                         <div class="progress-bar <?php if($porcentaje < 100) echo 'progress-bar-pending'; ?>" 
-                                             style="width: <?php echo $porcentaje; ?>%;">
+                                             data-percentage="<?php echo number_format($porcentaje, 0); ?>">
                                             <?php echo number_format($porcentaje, 0); ?>%
                                         </div>
                                     </div>
@@ -109,10 +101,23 @@ $rol = $_SESSION['rol_usuario'] ?? 'Usuario';
             </div>
             
             <br>
-            <a href="index.php?controlador=acceso&accion=panelPrincipal" class="button-secondary">
+            <a href="index.php?controlador=acceso&accion=panelPrincipal" class="button-secondary back-to-panel">
                 &larr; Volver al Panel Principal
             </a>
         </div>
     </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Selecciona todas las barras de progreso que tienen el atributo de datos
+            const progressBars = document.querySelectorAll('.progress-bar[data-percentage]');
+
+            progressBars.forEach(bar => {
+                const percentage = bar.getAttribute('data-percentage');
+                // Aplica el ancho dinámico usando JavaScript
+                bar.style.width = percentage + '%'; 
+            });
+        });
+    </script>
 </body>
 </html>

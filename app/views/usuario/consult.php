@@ -1,6 +1,10 @@
 <?php
     $rol = $_SESSION['rol_usuario'] ?? 'Administrador';
     $nombre = $_SESSION['nombre_usuario'] ?? 'Usuario';
+
+    // Definimos las clases de los botones de acción para simplificar la vista
+    $clase_editar = 'btn-edit btn-small-link'; 
+    $clase_eliminar = 'btn-delete btn-small-link btn-delete-alert'; 
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -8,31 +12,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuarios</title>
-    <!-- Enlazamos los estilos del panel (para el layout) y del CRUD (para la tabla) -->
     <link rel="stylesheet" href="public/css/panel_style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="public/css/crud_style.css?v=<?php echo time(); ?>">
 </head>
 <body>
 
-    <!-- Contenedor principal (Sidebar + Contenido) -->
     <div class="main-container">
         
-        <!-- ===== MENÚ LATERAL (SIDEBAR) ===== -->
         <nav class="sidebar">
             <div class="sidebar-header">
                 <span class="logo">UPEMOR</span>
                 <span class="logo-sub">Gestión de Usuarios</span>
             </div>
             <ul class="sidebar-menu">
-                <!-- El enlace activo es Usuarios -->
                 <li><a href="index.php?controlador=user&accion=consultarUsuarios" class="sidebar-link active">Usuarios</a></li>
             </ul>
         </nav>
 
-        <!-- ===== CONTENIDO PRINCIPAL ===== -->
         <div class="main-content">
             
-            <!-- Cabecera del módulo -->
             <header class="module-header">
                 <div class="header-title">
                     <h1>Módulo: Gestión de Usuarios</h1>
@@ -44,17 +42,14 @@
                 </div>
             </header>
 
-            <!-- 1. Tarjeta de Consulta (Tabla) -->
             <div class="form-card">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="button-group-header">
                     <h2>Consulta de usuarios</h2>
-                    <!-- Botón para ir a registrar nuevo (Estilo secundario o primario) -->
-                    <a href="index.php?controlador=user&accion=insertarUsuario" class="button-primary" style="padding: 8px 15px; font-size: 0.9em;">
+                    <a href="index.php?controlador=user&accion=insertarUsuario" class="button-primary btn-new-user">
                         + Nuevo Usuario
                     </a>
                 </div>
 
-                <!-- TABLA DE RESULTADOS -->
                 <table class="data-table">
                     <thead>
                         <tr>
@@ -63,7 +58,7 @@
                             <th>Matrícula</th>
                             <th>Rol</th>
                             <th>Grado</th>
-                            <th style="text-align: center;">Acciones</th>
+                            <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,38 +69,31 @@
                             <tr>
                                 <td><?php echo htmlspecialchars($row['id_profesor']); ?></td>
                                 
-                                <!-- Combinamos nombres para que se vea más limpio como en el boceto -->
-                                <td style="font-weight: 500; color: #333;">
+                                <td class="user-name-cell">
                                     <?php echo htmlspecialchars($row['nombre'] . ' ' . $row['apellido_pa'] . ' ' . $row['apellido_ma']); ?>
                                 </td>
                                 
                                 <td><?php echo htmlspecialchars($row['matricula']); ?></td>
                                 
                                 <td>
-                                    <!-- Badge simple para el rol -->
-                                    <span style="background-color: #f3f4f6; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; color: #555;">
+                                    <span class="role-badge">
                                         <?php echo htmlspecialchars($row['rol']); ?>
                                     </span>
                                 </td>
                                 
                                 <td><?php echo htmlspecialchars($row['grado_academico']); ?></td>
                                 
-                                <td style="text-align: center;">
-                                    <!-- Botones de Acción con clases CSS -->
+                                <td class="text-center">
                                     
-                                    <!-- Editar -->
                                     <a href="index.php?controlador=user&accion=actualizarUsuario&id=<?php echo $row['id_profesor']; ?>" 
-                                       class="button-secondary" 
-                                       style="padding: 5px 10px; font-size: 0.85em; margin-right: 5px; text-decoration: none;">
+                                        class="<?php echo $clase_editar; ?>">
                                         Editar
                                     </a>
 
-                                    <!-- Eliminar (Solo Admin) -->
                                     <?php if (isset($_SESSION['rol_usuario']) && $_SESSION['rol_usuario'] == 'Administrador'): ?>
                                         <a href="index.php?controlador=user&accion=eliminarUsuario&id=<?php echo $row['id_profesor']; ?>" 
-                                           class="button-secondary"
-                                           style="padding: 5px 10px; font-size: 0.85em; color: #d9534f; background-color: #fdf2f2; border-color: #f5c6cb;"
-                                           onclick="return confirm('¿Seguro que deseas eliminar este usuario?');">
+                                            class="<?php echo $clase_eliminar; ?>"
+                                            onclick="return confirm('¿Seguro que deseas eliminar este usuario?');">
                                             Eliminar
                                         </a>
                                     <?php endif; ?>
@@ -116,7 +104,7 @@
                         else: 
                         ?>
                             <tr>
-                                <td colspan="6" style="text-align: center; padding: 20px; color: #777;">
+                                <td colspan="6" class="no-data-user-cell">
                                     No se encontraron usuarios registrados.
                                 </td>
                             </tr>
@@ -125,14 +113,10 @@
                 </table>
             </div>
             
-            <!-- Botón para volver (opcional, ya que tienes el sidebar) -->
             <br>
-            <a href="index.php?controlador=acceso&accion=panelPrincipal" style="text-decoration: none; color: #666; font-size: 0.9em;">
+            <a href="index.php?controlador=acceso&accion=panelPrincipal" class="back-to-panel">
                 &larr; Volver al Panel Principal
             </a>
 
-        </div> <!-- fin .main-content -->
-    </div> <!-- fin .main-container -->
-    
-</body>
+        </div> </div> </body>
 </html>
