@@ -25,11 +25,6 @@
             </div>
             <ul class="sidebar-menu">
                 <li><a href="index.php?controlador=user&accion=consultarUsuarios" class="sidebar-link active">Usuarios</a></li>
-                <li><a href="index.php?controlador=materia&accion=consultarMaterias" class="sidebar-link">Materias</a></li>
-                <li><a href="index.php?controlador=academia&accion=consultarAcademias" class="sidebar-link">Academias</a></li>
-                <li><a href="index.php?controlador=instrumento&accion=consultarInstrumentos" class="sidebar-link">Instrumentos</a></li>
-                <li><a href="index.php?controlador=periodo&accion=consultarPeriodos" class="sidebar-link">Periodos</a></li>
-                <li><a href="index.php?controlador=user&accion=consultarPorAcademia" class="sidebar-link">Consultas y Reportes</a></li>
             </ul>
         </nav>
 
